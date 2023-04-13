@@ -1,6 +1,7 @@
 ---
 - name: Install Docker on EC2 Instances
   hosts: testserver
+  remote_user: devopsadmin
   become: true
   tasks:
     - name: Install dependencies
