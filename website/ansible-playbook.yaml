@@ -4,25 +4,9 @@
   remote_user: devopsadmin
   become: true
   tasks:
-    tasks:
     - name: Install Docker
-      yum:
-        name: docker
-        state: present
-
-    - name: Start Docker service
-      service:
-        name: docker
-        state: started
-        enabled: yes
-
-    - name: Add devopsadmin to docker group
-      user:
-        name: devopsadmin
-        groups: docker
-        append: yes
-
-    - name: Restart Docker service
-      systemd:
-        name: docker
-        state: restarted
+      shell: |
+        sudo amazon-linux-extras install docker -y
+        sudo systemctl start docker
+        sudo usermod -aG docker devopsadmin
+        sudo systemctl enable docker
