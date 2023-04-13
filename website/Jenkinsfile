@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+      label 'slave01'
+    }
+    
+    stages {
+        stage('Clone Git Repo') {
+            steps {
+                git(
+                    url: 'https://github.com/dashshishir/projCert.git',
+                    branch: 'master'
+                )
+            }
+        }
+        stage('Install Docker') {
+            steps {
+                ansiblePlaybook(
+                    playbook: 'website/ansible-playbook.yaml',
+                    become: true,
+                    colorized: true
+                )
+            }
+        }
+    }
+}
