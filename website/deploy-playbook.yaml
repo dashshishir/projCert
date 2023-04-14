@@ -7,7 +7,7 @@
     docker_registry: docker.io
     dockerhub_repo: dashshishir/devopsedu
     docker_image_tag: latest
-    ansible_python_interpreter: /usr/bin/python3
+    ansible_python_interpreter: /usr/bin/python
   tasks:
     - name: Pull the Docker image
       docker_image:
@@ -16,12 +16,12 @@
 
     - name: Stop and remove the existing container
       docker_container:
-        name: devopsedu-webapp
+        name: devopsedu
         state: absent
 
     - name: Run the new container
       docker_container:
-        name: devopsedu-webapp
+        name: devopsedu
         image: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
         ports:
           - "8080:80"
