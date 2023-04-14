@@ -1,0 +1,28 @@
+---
+- name: Install Docker on EC2 Instances
+  hosts: testserver
+  remote_user: devopsadmin
+  become: true
+  vars: 
+    docker_registry: docker.io
+    dockerhub_repo: dashshishir/devopsedu
+    docker_image_tag: latest
+  tasks:
+    - name: Pull the Docker image
+      docker_image:
+        name: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
+        pull: yes
+
+    - name: Stop and remove the existing container
+      docker_container:
+        name: devopsedu-webapp
+        state: absent
+
+    - name: Run the new container
+      docker_container:
+        name: devopsedu-webapp
+        image: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
+        ports:
+          - "8080:80"
+        detach: yes
+
