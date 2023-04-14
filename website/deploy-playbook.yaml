@@ -16,6 +16,6 @@
         docker rm -f $(docker ps -aq)
     - name: Run the container
       shell: |
-        docker run -d -p 8080:80 dashshishir/devopsedu:latest
+        docker run -d -p 8080:80 {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
 
 
