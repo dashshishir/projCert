@@ -9,6 +9,7 @@
     docker_image_tag: latest
     ansible_python_interpreter: /usr/bin/python
   tasks:
+
     - name: Pull the Docker image
       docker_image:
         name: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
