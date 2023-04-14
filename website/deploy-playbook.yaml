@@ -17,7 +17,7 @@
     #     docker container rm devopsedu
     - name: Run the container
       shell: |
-        docker run -p -d  8080:80 {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
+        docker run-d -p 8080:80 {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
     # - name: Pull the Docker image
     #   docker_image:
     #     name: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
