@@ -9,22 +9,30 @@
     docker_image_tag: latest
     ansible_python_interpreter: /usr/local/bin/python
   tasks:
+    - name: Pull the docker image
+      shell: |
+        docker pull {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
+    - name: Stop and Remove the existing container
+      shell: |
+        docker container rm devopsedu
+    - name: Run the container
+      shell: |
+        docker run -p -d  8080:80 {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
+    # - name: Pull the Docker image
+    #   docker_image:
+    #     name: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
+    #     pull: yes
 
-    - name: Pull the Docker image
-      docker_image:
-        name: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
-        pull: yes
+    # - name: Stop and remove the existing container
+    #   docker_container:
+    #     name: devopsedu
+    #     state: absent
 
-    - name: Stop and remove the existing container
-      docker_container:
-        name: devopsedu
-        state: absent
-
-    - name: Run the new container
-      docker_container:
-        name: devopsedu
-        image: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
-        ports:
-          - "8080:80"
-        detach: yes
+    # - name: Run the new container
+    #   docker_container:
+    #     name: devopsedu
+    #     image: "{{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}"
+    #     ports:
+    #       - "8080:80"
+    #     detach: yes
 
