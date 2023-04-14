@@ -12,9 +12,9 @@
     - name: Pull the docker image
       shell: |
         docker pull {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
-    - name: Stop and Remove the existing container
-      shell: |
-        docker container rm devopsedu
+    # - name: Stop and Remove the existing container
+    #   shell: |
+    #     docker container rm devopsedu
     - name: Run the container
       shell: |
         docker run -p -d  8080:80 {{ docker_registry }}/{{ dockerhub_repo }}:{{ docker_image_tag }}
