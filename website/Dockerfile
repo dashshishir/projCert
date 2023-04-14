@@ -1,4 +1,5 @@
-FROM devopsedu/webapp 
-ADD . /var/www/html
-RUN rm /var/www/html/index.html
+FROM devopsedu/webapp
+WORKDIR /var/www/html
+ADD . .
+RUN rm -f /var/www/html/index.html
 CMD apachectl -D FOREGROUND
