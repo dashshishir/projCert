@@ -7,6 +7,7 @@
     docker_registry: docker.io
     dockerhub_repo: dashshishir/devopsedu
     docker_image_tag: latest
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Pull the Docker image
       docker_image:
